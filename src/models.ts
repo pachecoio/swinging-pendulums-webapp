@@ -3,6 +3,8 @@ export type Pendulum = {
   origin: Position
   bob: Bob;
   armLength: number;
+  angle: number;
+  mass: number;
 };
 
 export type Bob = {

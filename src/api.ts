@@ -16,6 +16,13 @@ export async function fetchPendulum(port: number): Promise<Pendulum> {
   return response.data;
 }
 
+export async function updatePendulum(port: number, data: UpdatePendulumOptions) {
+  const client = getPendulumApi(port);
+  await client.put("/pendulum", data);
+}
+
+
+
 export async function startAllPendulums() {
   const client = getSupervisorApi();
   await client.post("/startAll");
@@ -61,5 +68,21 @@ export type Config = {
   gravity: number;
   time: number;
   refreshRate: number;
+};
+
+export type UpdatePendulumOptions = {
+  mass?: number;
+  armLength?: number;
+  origin?: Position;
+  angle?: number;
+  bobRadius?: number;
+  bobColor?: string;
+  left?: string;
+  right?: string;
+};
+
+export type Position = {
+  x: number;
+  y: number;
 };
 

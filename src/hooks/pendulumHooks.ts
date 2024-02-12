@@ -49,3 +49,24 @@ export function usePollingPendulums(configs: PendulumConfig[], refreshRate: numb
     loading,
   };
 }
+
+export function useFetchPendulum(port: number): { pendulum: Pendulum | null, loading: boolean } {
+  const [pendulum, setPendulum] = useState<Pendulum | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    loadPendulum();
+  }, [port]);
+
+  async function loadPendulum() {
+    setLoading(true);
+    const pendulum = await fetchPendulum(port);
+    setPendulum(pendulum);
+    setLoading(false);
+  }
+
+  return {
+    pendulum,
+    loading,
+  };
+}

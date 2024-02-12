@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import './App.css'
-import { PendulumConfig, listPendulumConfigs, pauseAllPendulums, startAllPendulums, stopAllPendulums } from './api'
+import { PendulumConfig, listPendulumConfigs } from './api'
 import { Canvas } from './components/canvas'
+import { MainControlPanel } from './components/main-control-panel'
+import { PendulumControlPanel } from './components/control-panel'
 
 function App() {
   const [configs, setConfigs] = useState<PendulumConfig[]>([])
@@ -24,15 +25,26 @@ function App() {
 
   return (
     <>
-      <div>
-        <h1>Pendulum Playground</h1>
-        <button onClick={startAllPendulums}>Start</button>
-        <button onClick={pauseAllPendulums}>Pause</button>
-        <button onClick={stopAllPendulums}>Stop and reset</button>
+      <div className='flex flex-col items-center'>
+        <h1 className='text-4xl font-extrabold'>Pendulum Playground</h1>
+        <MainControlPanel />
       </div>
       <Canvas configs={configs} />
+      <ControlPanel configs={configs} />
     </>
   )
 }
+
+export function ControlPanel({ configs }: { configs: PendulumConfig[] }) {
+
+  return (
+    <div className='flex space-x-2'>
+      {configs.map((config, i) => (
+        <PendulumControlPanel key={i} config={config} />
+      ))}
+    </div>
+  )
+}
+
 
 export default App

@@ -11,7 +11,6 @@ export function Canvas({ configs = [] }: { configs: PendulumConfig[] }) {
   }
 
   const drawPendulum = async (p5: any, pendulum: Pendulum) => {
-    console.log('redrawing pendulum', pendulum)
     p5.color(pendulum.bob.color);
     p5.strokeWeight(2);
     p5.stroke(pendulum.bob.color);
