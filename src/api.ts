@@ -62,6 +62,20 @@ export function getPendulumApi(port: number) {
   });
 }
 
+export function serverSentEvents(port: number, callback: (data: any) => void) {
+  const source = new EventSource(`${BASE_URL}:${port}/events`);
+  source.onmessage = (event) => {
+    callback(JSON.parse(event.data));
+  };
+}
+
+export function serverSentEventsSupervisor(callback: (data: any) => void) {
+  const source = new EventSource(`${BASE_URL}:${SUPERVISOR_PORT}/events`);
+  source.onmessage = (event) => {
+    callback(event.data);
+  };
+}
+
 export type PendulumConfig = {
   port: number;
   config: Config;

@@ -3,10 +3,13 @@ import { PendulumConfig, listPendulumConfigs } from './api'
 import { Canvas } from './components/canvas'
 import { MainControlPanel } from './components/main-control-panel'
 import { PendulumControlPanel } from './components/control-panel'
+import { Toaster } from 'sonner'
+import { useSupervisorSentEventsNotification } from './hooks/supervisorHooks'
 
 function App() {
   const [configs, setConfigs] = useState<PendulumConfig[]>([])
   const [loading, setLoading] = useState(false)
+  useSupervisorSentEventsNotification()
 
   useEffect(() => {
     loadConfigs()
@@ -31,6 +34,10 @@ function App() {
       </div>
       <Canvas configs={configs} />
       <ControlPanel configs={configs} />
+      <Toaster
+        position='top-right'
+        closeButton={true}
+      />
     </>
   )
 }
