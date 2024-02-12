@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 const formSchema = z.object({
   gravity: z.string(),
@@ -31,7 +32,7 @@ export function MainControlForm({ initialValues, onSubmit }: MainControlFormProp
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className='flex flex-col space-y-2'>
         <FormField
           control={form.control}
           name='gravity'
@@ -71,6 +72,9 @@ export function MainControlForm({ initialValues, onSubmit }: MainControlFormProp
             </FormItem>
           )}
         />
+        <div className='flex justify-end mt-4'>
+          <Button type='submit' className='btn btn-primary'>Save</Button>
+        </div>
       </form>
     </Form>
   )

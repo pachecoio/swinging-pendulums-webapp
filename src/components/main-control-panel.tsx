@@ -1,4 +1,4 @@
-import { pauseAllPendulums, startAllPendulums, stopAllPendulums } from '@/api'
+import { Config, pauseAllPendulums, startAllPendulums, stopAllPendulums, updateSettings } from '@/api'
 import { Button } from '@/components/ui/button'
 import { PlayIcon, PauseIcon, StopIcon, GearIcon } from '@radix-ui/react-icons'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
@@ -6,7 +6,9 @@ import { MainControlForm } from '@/forms/main-control-form'
 
 export function MainControlPanel() {
 
-  async function handleSettingsChange(values: any) {
+  async function handleSettingsChange(settings: Config) {
+    console.log('update settings', settings)
+    await updateSettings(settings)
   }
 
   return (

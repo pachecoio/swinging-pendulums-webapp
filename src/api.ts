@@ -38,7 +38,8 @@ export async function stopAllPendulums() {
 
 export async function updateSettings(config: Config) {
   const client = getSupervisorApi();
-  await client.put("/settings", config);
+  const res = await client.put("/settings", config);
+  console.log('settings updated', res)
 }
 
 function getSupervisorApi() {
