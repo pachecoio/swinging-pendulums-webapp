@@ -21,8 +21,6 @@ export async function updatePendulum(port: number, data: UpdatePendulumOptions) 
   await client.put("/pendulum", data);
 }
 
-
-
 export async function startAllPendulums() {
   const client = getSupervisorApi();
   await client.post("/startAll");
@@ -36,6 +34,11 @@ export async function pauseAllPendulums() {
 export async function stopAllPendulums() {
   const client = getSupervisorApi();
   await client.post("/stopAll");
+}
+
+export async function updateSettings(config: Config) {
+  const client = getSupervisorApi();
+  await client.put("/settings", config);
 }
 
 function getSupervisorApi() {

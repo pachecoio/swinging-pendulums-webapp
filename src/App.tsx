@@ -46,5 +46,4 @@ export function ControlPanel({ configs }: { configs: PendulumConfig[] }) {
   )
 }
 
-
 export default App

@@ -1,8 +1,14 @@
 import { pauseAllPendulums, startAllPendulums, stopAllPendulums } from '@/api'
 import { Button } from '@/components/ui/button'
-import { PlayIcon, PauseIcon, StopIcon } from '@radix-ui/react-icons'
+import { PlayIcon, PauseIcon, StopIcon, GearIcon } from '@radix-ui/react-icons'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+import { MainControlForm } from '@/forms/main-control-form'
 
 export function MainControlPanel() {
+
+  async function handleSettingsChange(values: any) {
+  }
+
   return (
     <>
       <div className='flex items-center space-x-2 my-4'>
@@ -15,6 +21,26 @@ export function MainControlPanel() {
         <Button variant='destructive' onClick={stopAllPendulums}>
           <StopIcon className='mx-2' />
         </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant='outline'>
+              <GearIcon className='mx-2' />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Settings</DialogTitle>
+            </DialogHeader>
+            <DialogDescription>
+              Change the settings for the pendulum simulation.
+            </DialogDescription>
+            <MainControlForm initialValues={{
+              gravity: 1,
+              time: 1,
+              refreshRate: 100,
+            }} onSubmit={handleSettingsChange} />
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   )
